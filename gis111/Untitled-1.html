@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hainan GIS Open Platform</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007acc;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        p {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #007acc;
+            text-decoration: none;
+        }
+
+        section {
+            display: none;
+            margin: 20px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #search {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #search-bar {
+            margin-top: 20px;
+        }
+
+        #topics {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        #data-name {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 封面 -->
+<section id="home">
+    <img src="geography_image.jpg" alt="Geography Image">
+    <h1>Welcome to Hainan GIS Open Platform</h1>
+    <p>Explore geographic information with ease.</p>
+    <div id="search">
+        <input type="text" placeholder="Search...">
+        <button onclick="searchData()">Search</button>
+    </div>
+    <a href="#search">Start Exploring</a>
+</section>
+
+<!-- 搜索页面 -->
+<section id="search" style="display: none;">
+    <h1>Search Data</h1>
+    <div id="search-bar">
+        <input type="text" placeholder="Search...">
+        <button onclick="searchData()">Search</button>
+    </div>
+    <div id="topics">
+        <div><a href="#iso-categories">ISO Categories</a></div>
+        <div><a href="#inspire-themes">INSPIRE Themes</a></div>
+    </div>
+    <div id="data-name">
+        <!-- 数据名称将在搜索后动态添加 -->
+    </div>
+</section>
+
+<script>
+    // 搜索数据的JavaScript逻辑，你需要根据实际情况实现
+    function searchData() {
+        // 实现搜索逻辑，根据搜索结果更新页面内容
+        // 例如，可以使用AJAX请求后端接口获取数据，并动态添加到页面上
+        // 这里只是一个简单的示例，实际上可能需要使用更复杂的逻辑
+        var searchData = [
+            { topic: 'ISO Categories', name: 'Data 1' },
+            { topic: 'ISO Categories', name: 'Data 2' },
+            { topic: 'INSPIRE Themes', name: 'Data 3' },
+            { topic: 'INSPIRE Themes', name: 'Data 4' },
+        ];
+
+        var dataNameSection = document.getElementById('data-name');
+        dataNameSection.innerHTML = '';
+
+        var searchTerm = document.querySelector('#search-bar input').value.toLowerCase();
+
+        searchData.forEach(function (item) {
+            if (item.name.toLowerCase().includes(searchTerm)) {
+                var dataItem = document.createElement('div');
+                dataItem.textContent = item.name;
+                dataNameSection.appendChild(dataItem);
+            }
+        });
+
+        // 显示搜索结果页面
+        showSection('search');
+    }
+
+    // 辅助函数，显示指定的section并隐藏其他section
+    function showSection(sectionId) {
+        var sections = document.querySelectorAll('section');
+        sections.forEach(function (section) {
+            section.style.display = 'none';
+        });
+
+        var selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
